@@ -36,7 +36,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Check Unit Tests
-      - uses: invisirisk/pse-action@v1
+        uses: invisirisk/pse-action@v1
         with:
             github-token: ${{ secrets.GITHUB_TOKEN}}
       - run: mvn --errors test

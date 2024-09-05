@@ -13,24 +13,27 @@ jobs:
 
     services:
       pse:
-        image: invisirisk/pse
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          PSE_DEBUG_FLAG: --alsologtostderr
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: ${{ matrix.java-version }}
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Check Unit Tests
-        uses: invisirisk/pse-action@v1
-        with:
-            github-token: ${{ secrets.GITHUB_TOKEN}}
-      - run: mvn --errors test
-
+          image: invisirisk/pse
+          env:
+            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+            PSE_DEBUG_FLAG: --alsologtostderr
+      container:
+         image: alpine:3.14
+         options: --cap-add=NET_ADMIN
+      runs-on: ${{ matrix.os }}
+  
+      steps:
+        - name: Set up JDK
+          uses: actions/setup-java@v1
+          with:
+            java-version: ${{ matrix.java-version }}
+  
+        - name: Checkout
+          uses: actions/checkout@v2
+  
+        - name: Check Unit Tests
+          uses: invisirisk/pse-action@v1
+          with:
+              github-token: ${{ secrets.GITHUB_TOKEN}}
+        - run: mvn --errors test
+  

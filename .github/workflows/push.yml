@@ -37,7 +37,7 @@ jobs:
 
       - name: Check Unit Tests
       - uses: invisirisk/pse-action@v1
-         with:
-          github-token: ${{ secrets.GITHUB_TOKEN}}
-      -  run: mvn --errors test
+        with:
+            github-token: ${{ secrets.GITHUB_TOKEN}}
+      - run: mvn --errors test
 
